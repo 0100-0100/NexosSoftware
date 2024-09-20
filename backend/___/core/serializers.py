@@ -136,15 +136,12 @@ class LogoutUserSerializer(serializers.Serializer):
     }
 
     def validate(self, attrs):
-        self.token = attrs.get('refresh_token')
+        self.token = attrs.get('refresh')
         return attrs
 
     def save(self, **kw):
-        token = RefreshToken(self.token)
-        token.blacklist()
         try:
             token = RefreshToken(self.token)
             token.blacklist()
         except TokenError:
             return self.fail('bad_token')
-        return super().save(**kw)
