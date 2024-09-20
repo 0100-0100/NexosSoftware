@@ -1,15 +1,14 @@
-FROM nginx
-
 FROM node
 
 WORKDIR /frontend
 
-COPY package.json .
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY ./package.json ./package.json
 
 RUN npm install
 
-COPY ./tsconfig.json ./tsconfig.json
-COPY ./src ./src
+COPY . ./
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD [ "npm", "start" ]
