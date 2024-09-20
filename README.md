@@ -1,2 +1,57 @@
-# NexusSoftware
+# NexusSoftware - Tech Cha
 This is the repository storing the codebase of the technical test sent in by Nexus Software Colombia on September 18 2024
+
+## This is a single web application projcet using the following technologies:
+- Django Backend App Server
+- PostgreSQL Database Server
+- Redis Cache Server
+- TypeScript React Frontend App Server
+- NGINX Frontend WebServer
+
+# Installation and How to run?:
+You need to setup a .env file on the root of the project so that docker the current environment variables have been configured.
+``` bash
+    DJANGO_SECRET_KEY='django-insecure-wxwn^@sq5fimfy^sg_%_thty)y&umyv1+xr%j$97kgdoku9)mt'
+
+    POSTGRES_ENGINE='django.db.backends.postgresql'
+    POSTGRES_DB='django_backend_db'
+    POSTGRES_USER='django_backend_user'
+    POSTGRES_PASSWORD='123'
+    POSTGRES_PORT='5432'
+    ROOT_POSTGRES_PASSWORD='1234'
+
+    POSTGRES_HOST='postgres'
+    REDIS_HOST='redis'
+
+    # Check section mailtrap.io for info on how to setup outbound email testing and validation.
+    EMAIL_HOST='sandbox.smtp.mailtrap.io'
+    EMAIL_HOST_USER=''
+    EMAIL_HOST_PASSWORD=''
+    DEFAULT_FROM_EMAIL='admin@email.com'
+    EMAIL_PORT='2525'
+    EMAIL_USE_TLS=True
+```
+
+> clone the repository and execute the provided script ./docker.sh
+> You can also execute all the docker commands manually.
+``` bash
+    docker stop $(docker ps -a -q) 2>>/dev/null;
+    docker rm $(docker ps -a -q) 2>>/dev/null;
+    docker compose pull && docker compose build && docker compose up
+```
+### Take into account that running these commands you will stop and removem all the currently active docker containers.
+
+The compose.yaml file includes configurations for initializing the PostgreSQL database to bootstrap it in order to be ready for Django,
+Here's you can see the init.sql file used for the postgres container:
+``` sql
+CREATE DATABASE django_backend_db;
+CREATE USER django_backend_user WITH ENCRYPTED PASSWORD '123';
+ALTER ROLE django_backend_user SET client_encoding TO 'utf8';
+ALTER ROLE django_backend_user SET default_transaction_isolation TO 'read committed';
+ALTER ROLE django_backend_user SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE django_backend_db TO django_backend_user;
+\c django_backend_db
+GRANT ALL ON SCHEMA public TO django_backend_user;
+```
+
+Once you create an account on https://mailtrap.io/ you will be able to generate the EMAIL credentials in order to authenticate a user with the web application
