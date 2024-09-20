@@ -18,7 +18,6 @@ import time
 
 
 class TestGetUsersEndpoint(APIView):
-
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -29,7 +28,7 @@ class TestGetUsersEndpoint(APIView):
             'username': user.username,
             'date_joined': user.date_joined
         } for user in users]
-        return Response(response)
+        return Response(response, status=status.HTTP_200_OK)
 
     def post(self, request):
         serializer = serializers.CoreUserRegisterSerializer(data=request.data)
@@ -91,13 +90,6 @@ class LoginUserView(GenericAPIView):
         )
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-class TestEndpoint(APIView):
-    def get(self, request):
-        return Response({
-            'Annonymous': request.user.is_anonymous
-        })
 
 
 class PasswordResetRequestView(GenericAPIView):
