@@ -1,4 +1,4 @@
-# NexusSoftware - Technical Challenge
+# NexosSoftware - Technical Challenge
 This is the repository storing the codebase of the technical test sent in by Nexos Software - Colombia on September 18 2024
 ---
 The most recend docker images available have been used as well as local development done in Ubuntu 24.04 with WSL.
