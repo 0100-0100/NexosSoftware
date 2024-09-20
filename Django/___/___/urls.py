@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core import views as core_endpoints
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', core_endpoints.CoreUserEndpoint.as_view(), name='core_user'),
-    path('test/', core_endpoints.TestEndpoint.as_view(), name='test'),
-]
+    path('api/v1/auth/', include('core.urls')),
+    path('api/v1/auth/', include('social_auth.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
