@@ -1,5 +1,12 @@
 # NexusSoftware - Technical Challenge
 This is the repository storing the codebase of the technical test sent in by Nexos Software - Colombia on September 18 2024
+---
+The most recend docker images available have been used as well as local development done in Ubuntu 24.04 with WSL.
+You can find the version of packages and specific dependencies on the respective package management files.
+- [Python - requirements.txt](./backend/requirements.txt)
+- [React TypeScript - package.json](./frontend/package.json)
+
+Python3.12|Django|Django Rest Framework|Docker|Node|TypeScript|NGINX|React|Tailwind.css
 
 ## This is a Single Page Web application project using the following technologies
 - Django Backend App Server
@@ -8,12 +15,13 @@ This is the repository storing the codebase of the technical test sent in by Nex
 - TypeScript React Frontend App Server
 - NGINX Frontend WebServer
 
-Python3.12
-Docker
-Node
-TypeScript
+Full implementation of user auth flows with the use of simpleJWT package for Django:
+- SignUp
+- Email OTP Verification
+- Email Password Reset
+- Login
+- Logout
 
-Full implementation of user SignUp, Verification, Password Reset, Login and Logout auth flows are implemented with the use of simpleJWT package for Django.
 
 # Installation and How to run?:
 ## 1
@@ -39,6 +47,7 @@ You need to setup a .env file on the root of the project so that docker the curr
     EMAIL_PORT='2525'
     EMAIL_USE_TLS=True
 ```
+
 ## 2
 Clone the repository and execute the provided script ./docker.sh
 You can also execute all the following docker commands manually:
