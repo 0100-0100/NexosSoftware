@@ -67,11 +67,11 @@ Once you create an account on https://mailtrap.io/ you will be able to generate 
 
 
 # Overview:
-## Signup
+## Signup Page
 ![signup](images/SignUp.PNG "Signup")
-## Verify with received email one time password
+## Verify with received email one time password Page
 ![verify](images/VerifyRegistrationOTP.PNG "Verify")
 ## Mailtrap
 ![mailtrap](image/mailtrap.PNG "mailtrap")
-## Verified.PNG
+## Verified Page
 ![verified](image/Verified.PNG "Verified")
