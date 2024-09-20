@@ -6,7 +6,7 @@ You can find the version of packages and specific dependencies on the respective
 - [Python - requirements.txt](./backend/requirements.txt)
 - [React TypeScript - package.json](./frontend/package.json)
 
-Python3.12|Django|Django Rest Framework|Docker|Node|TypeScript|NGINX|React|Tailwind.css
+Python3.12 - Django - Django Rest Framework - Docker - Node - TypeScript - Axios - NGINX - React - Tailwind.css
 
 ## This is a Single Page Web application project using the following technologies
 - Django Backend App Server
