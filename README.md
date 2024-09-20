@@ -1,6 +1,6 @@
 # NexosSoftware - Technical Challenge
 
-### This is the repository storing the codebase of the technical test sent in by Nexos Software - Colombia on September 18 2024
+#### This is the repository storing the codebase of the technical test sent in by Nexos Software - Colombia on September 18 2024
 
 ---
 The most recend docker images available have been used as well as local development done in Ubuntu 24.04 with WSL.
@@ -25,8 +25,8 @@ Python3.12 - Django - Django Rest Framework - Docker - Node - TypeScript - Axios
 - Logout
 
 
-# Installation and How to run?:
-## 1
+## Installation and How to run?:
+### 1
 You need to setup a .env file on the root of the project so that docker the current environment variables are configured.
 ``` bash
     DJANGO_SECRET_KEY='django-insecure-wxwn^@sq5fimfy^sg_%_thty)y&umyv1+xr%j$97kgdoku9)mt'
@@ -50,7 +50,7 @@ You need to setup a .env file on the root of the project so that docker the curr
     EMAIL_USE_TLS=True
 ```
 
-## 2
+### 2
 Clone the repository and execute the provided script ./docker.sh
 You can also execute all the following docker commands manually:
 ``` bash
@@ -75,7 +75,6 @@ GRANT ALL ON SCHEMA public TO django_backend_user;
 
 # Mailtrap
 Once you create an account on https://mailtrap.io/ you will be able to generate the email credentials in order to authenticate a user with the web application.
-
 
 # Overview:
 ## Signup Page
