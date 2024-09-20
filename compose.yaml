@@ -1,0 +1,58 @@
+services:
+  frontend:
+    container_name: react
+    depends_on:
+      backend:
+        condition: service_healthy
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+     - 3000:3000
+    volumes:
+     - ./frontend/:/frontend
+    env_file:
+      - .env
+
+  backend:
+    container_name: django
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+     - 8000:8000
+    volumes:
+     - ./backend/___:/___
+    env_file:
+      - .env
+    command: >
+      sh -c 'python3 manage.py migrate &&
+      python3 -m gunicorn ___.asgi:application -b 0.0.0.0:8000 -k uvicorn_worker.UvicornWorker'
+    healthcheck:
+       test: ["CMD", "python3", "manage.py", "check"]
+
+  db:
+    image: postgres
+    container_name: postgres
+    user: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: ${ROOT_POSTGRES_PASSWORD}
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "django_backend_db"]
+
+  cache:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
