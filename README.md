@@ -39,7 +39,7 @@ You need to setup a .env file on the root of the project so that docker the curr
     docker rm $(docker ps -a -q) 2>>/dev/null;
     docker compose pull && docker compose build && docker compose up
 ```
-### Take into account that running these commands you will stop and removem all the currently active docker containers.
+Take into account that running these commands you will stop and removem all the currently active docker containers.
 
 The compose.yaml file includes configurations for initializing the PostgreSQL database to bootstrap it in order to be ready for Django,
 Here's you can see the init.sql file used for the postgres container:
@@ -54,4 +54,4 @@ GRANT ALL PRIVILEGES ON DATABASE django_backend_db TO django_backend_user;
 GRANT ALL ON SCHEMA public TO django_backend_user;
 ```
 
-Once you create an account on https://mailtrap.io/ you will be able to generate the EMAIL credentials in order to authenticate a user with the web application
+Once you create an account on https://mailtrap.io/ you will be able to generate the EMAIL credentials in order to authenticate a user with the web application.
