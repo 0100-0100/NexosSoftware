@@ -1,15 +1,23 @@
 # NexusSoftware - Technical Challenge
-This is the repository storing the codebase of the technical test sent in by Nexus Software Colombia on September 18 2024
+This is the repository storing the codebase of the technical test sent in by Nexos Software - Colombia on September 18 2024
 
-## This is a single web application projcet using the following technologies:
+## This is a Single Page Web application project using the following technologies
 - Django Backend App Server
 - PostgreSQL Database Server
 - Redis Cache Server
 - TypeScript React Frontend App Server
 - NGINX Frontend WebServer
 
+Python3.12
+Docker
+Node
+TypeScript
+
+Full implementation of user SignUp, Verification, Password Reset, Login and Logout auth flows are implemented with the use of simpleJWT package for Django.
+
 # Installation and How to run?:
-You need to setup a .env file on the root of the project so that docker the current environment variables have been configured.
+## 1
+You need to setup a .env file on the root of the project so that docker the current environment variables are configured.
 ``` bash
     DJANGO_SECRET_KEY='django-insecure-wxwn^@sq5fimfy^sg_%_thty)y&umyv1+xr%j$97kgdoku9)mt'
 
@@ -31,18 +39,18 @@ You need to setup a .env file on the root of the project so that docker the curr
     EMAIL_PORT='2525'
     EMAIL_USE_TLS=True
 ```
-
-> clone the repository and execute the provided script ./docker.sh
-> You can also execute all the docker commands manually.
+## 2
+Clone the repository and execute the provided script ./docker.sh
+You can also execute all the following docker commands manually:
 ``` bash
     docker stop $(docker ps -a -q) 2>>/dev/null;
     docker rm $(docker ps -a -q) 2>>/dev/null;
     docker compose pull && docker compose build && docker compose up
 ```
-Take into account that running these commands you will stop and removem all the currently active docker containers.
+Take into account that by running these commands you will stop and removem all the currently active docker containers.
 
-The compose.yaml file includes configurations for initializing the PostgreSQL database to bootstrap it in order to be ready for Django,
-Here's you can see the init.sql file used for the postgres container:
+The compose.yaml file includes configurations for initializing the PostgreSQL Database Server in order to be ready for Django,
+Here you can see the init.sql file used for the postgres container:
 ``` sql
 CREATE DATABASE django_backend_db;
 CREATE USER django_backend_user WITH ENCRYPTED PASSWORD '123';
@@ -54,4 +62,9 @@ GRANT ALL PRIVILEGES ON DATABASE django_backend_db TO django_backend_user;
 GRANT ALL ON SCHEMA public TO django_backend_user;
 ```
 
-Once you create an account on https://mailtrap.io/ you will be able to generate the EMAIL credentials in order to authenticate a user with the web application.
+# Mailtrap
+Once you create an account on https://mailtrap.io/ you will be able to generate the email credentials in order to authenticate a user with the web application.
+
+
+# Overview:
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
