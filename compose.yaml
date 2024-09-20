@@ -11,8 +11,6 @@ services:
      - 3000:3000
     volumes:
      - ./frontend/:/frontend
-    env_file:
-      - .env
 
   backend:
     container_name: django
