@@ -1,5 +1,7 @@
 # NexosSoftware - Technical Challenge
-This is the repository storing the codebase of the technical test sent in by Nexos Software - Colombia on September 18 2024
+
+### This is the repository storing the codebase of the technical test sent in by Nexos Software - Colombia on September 18 2024
+
 ---
 The most recend docker images available have been used as well as local development done in Ubuntu 24.04 with WSL.
 You can find the version of packages and specific dependencies on the respective package management files.
@@ -8,14 +10,14 @@ You can find the version of packages and specific dependencies on the respective
 
 Python3.12 - Django - Django Rest Framework - Docker - Node - TypeScript - Axios - NGINX - React - Tailwind.css
 
-## This is a Single Page Web application project using the following technologies
+### This is a Single Page Web application project using the following technologies:
 - Django Backend App Server
 - PostgreSQL Database Server
 - Redis Cache Server
 - TypeScript React Frontend App Server
 - NGINX Frontend WebServer
 
-Full implementation of user auth flows with the use of simpleJWT package for Django:
+### Full implementation of user auth flows with the use of simpleJWT package for Django:
 - SignUp
 - Email OTP Verification
 - Email Password Reset
