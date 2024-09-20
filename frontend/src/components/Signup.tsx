@@ -34,7 +34,6 @@ const Signup = () => {
         navigate("/otp/verify")
         toast.success(response_data.message)
       }
-      // server error pass to error
     }
   }
 
@@ -66,10 +65,12 @@ const Signup = () => {
             </div>
             <input className="submitButton" type="submit" value="Submit" />
           </form>
-          <h3 className='text-option'>Or</h3>
+          {/*
+              <h3 className='text-option'>Or</h3>
           <div className='googleContainer'>
             <button>Sign up with Google</button>
           </div>
+           */}
         </div>
       </div>
     </div>
