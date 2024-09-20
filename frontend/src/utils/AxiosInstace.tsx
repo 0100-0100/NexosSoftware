@@ -21,13 +21,12 @@ const AxiosInstance = axios.create({
   baseURL: baseURL,
   headers: {
     'Content-type': 'application/json',
-    'Authorization': localStorage.getItem('accessToken') ? `Bearer ${accessToken}` : ""
+    'Authorization': localStorage.getItem('token') ? `Bearer ${accessToken}` : ""
   }
 })
 
 AxiosInstance.interceptors.request.use(async (request) => {
   if (accessToken) {
-
     request.headers.Authorization = localStorage.getItem('token') ? `Bearer ${accessToken}` : ""
     const user = jwtDecode(accessToken)
     const isExpired = dayjs.unix(user.exp !== undefined? user.exp : 0).diff(dayjs()) < 1
@@ -39,10 +38,8 @@ AxiosInstance.interceptors.request.use(async (request) => {
       request.headers.Authorization = `Bearer ${request.data.access}`
       return request
     } else {
-        /* request.headers.Authorization = localStorage.getItem('token') ? `Bearer ${JSON.parse(localStorage.getItem('token'))}`
-  * return request */
-      const response = axios.post('/auth/logout', {'refresh_token': refreshToken})
-      if ((await response).status === 200) {
+      const response = axios.post('/auth/logout', {'refresh': refreshToken})
+      if ((await response).status === 204) {
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')
         localStorage.removeItem('user')
