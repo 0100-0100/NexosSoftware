@@ -3,8 +3,8 @@
 #### This is the repository storing the codebase of the technical test sent in by Nexos Software - Colombia on September 18 2024
 
 ---
-The most recend docker images available have been used as well as local development done in Ubuntu 24.04 with WSL.
-You can find the version of packages and specific dependencies on the respective package management files.
+The most recent docker images available have been used in the project as well as local development done in Ubuntu 24.04 with WSL.
+You can find the version of packages and specific dependencies on the corresponding package management files.
 - [Python - requirements.txt](./backend/requirements.txt)
 - [React TypeScript - package.json](./frontend/package.json)
 
