@@ -18,22 +18,25 @@ const Login = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    setIsLoading(true)
-    const response = await AxiosInstance.post("auth/login", data)
-    const response_data = response.data
-    setIsLoading(false)
-    const user = {
-      "email": response_data.email,
-      "username": response_data.username
+    if (data) {
+      setIsLoading(true)
+      const response = await AxiosInstance.post("auth/login", data)
+      const response_data = response.data
+      setIsLoading(false)
+      const user = {
+        "email": response_data.email,
+        "username": response_data.username
+      }
+      if (response.status === 200) {
+        localStorage.setItem("user", JSON.stringify(user))
+        localStorage.setItem("accessToken", JSON.stringify(response_data.access_token))
+        localStorage.setItem("refreshToken", JSON.stringify(response_data.refresh_token))
+        toast.success('Successful Login.')
+        navigate("/profile")
+      } else {
+        toast.error('Something went wrong.')
+      }
     }
-    if (response.status === 200) {
-      localStorage.setItem("user", JSON.stringify(user))
-      localStorage.setItem("token", JSON.stringify(response_data.access_token))
-      localStorage.setItem("refreshToken", JSON.stringify(response_data.refresh_token))
-      toast.success('Successful Login.')
-      navigate("/profile")
-    }
-      // server error pass to error
   }
 
   return (
