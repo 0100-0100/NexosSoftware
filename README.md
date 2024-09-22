@@ -74,7 +74,8 @@ GRANT ALL ON SCHEMA public TO django_backend_user;
 ```
 
 # Mailtrap
-Once you create an account on https://mailtrap.io/ you will be able to generate the email credentials in order to authenticate a user with the web application.
+Once you create an account on https://mailtrap.io/ you will be able to generate the email credentials in order to test the emails sent for verification
+in order for an user to authenticate with the web application.
 
 # Overview:
 ## Signup Page
