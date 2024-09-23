@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import AxiosInstance from '../utils/AxiosInstace'
+import AxiosInstance from '../utils/AxiosInstance'
 
 
 const Login = () => {
