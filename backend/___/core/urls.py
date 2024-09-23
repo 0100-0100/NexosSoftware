@@ -5,11 +5,12 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     # JWT Register - Login - Logout - Reset Password Flow.
-    path('register', views.RegisterUserView.as_view(), name='register'),
-    path('verify', views.VerifyUserEmail.as_view(), name='verify'),
+    path('signup', views.SignUpView.as_view(), name='signup'),
+    path('verify', views.VerifyEmailView.as_view(), name='verify'),
     path('login', views.LoginUserView.as_view(), name='login'),
 
-    path('refresh', TokenRefreshView.as_view(), name='refresh'),
+    path('token/', TokenRefreshView.as_view(), name='token'),
+    path('token/refresh', TokenRefreshView.as_view(), name='refresh'),
 
     path('password-reset', views.PasswordResetRequestView.as_view(), name='password-reset'),
     path('password-reset-confirm/<uidb64>/<token>', views.PasswordResetConfirm.as_view(), name='password-reset-confirm'),
