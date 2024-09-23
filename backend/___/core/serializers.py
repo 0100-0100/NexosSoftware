@@ -6,8 +6,11 @@ from django.urls import reverse
 from django.utils.encoding import smart_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
+from django.contrib.auth.password_validation import validate_password
+
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 from .models import CoreUser
@@ -15,14 +18,27 @@ from .utils import send_normal_email
 
 
 class CoreUserRegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(max_length=68, min_length=3, write_only=True)
+    password = serializers.CharField(
+        max_length=68, min_length=3, write_only=True,
+        validators=[validate_password]
+    )
+    password2 = serializers.CharField(write_only=True, required=True)
+    email = serializers.EmailField(
+        required=True,
+        validators=[UniqueValidator(queryset=CoreUser.objects.all())]
+    )
 
     class Meta:
         model = CoreUser
-        fields = ['email', 'username', 'password']
+        fields = ('email', 'username', 'password', 'password2')
 
     def validate(self, attrs):
-        return super().validate(attrs)
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError(
+                {"password": "Passwords didn't match."}
+            )
+
+        return attrs
 
     def create(self, validated_data):
         user = CoreUser.objects.create_user(
@@ -30,6 +46,9 @@ class CoreUserRegisterSerializer(serializers.ModelSerializer):
             username=validated_data.get('username'),
             password=validated_data.get('password')
         )
+
+        user.set_password(validated_data['password'])
+        user.save()
         return user
 
 
@@ -59,9 +78,10 @@ class CoreUserLoginSerializer(serializers.ModelSerializer):
         user_tokens = user.tokens()
 
         return {
-            'email': user.email, 'username': user.username,
-            'access_token': user_tokens.get('access'),
-            'refresh_token': user_tokens.get('refresh')
+            'email': user.email,
+            'username': user.username,
+            'access_token': str(user_tokens.get('access')),
+            'refresh_token': str(user_tokens.get('refresh'))
         }
 
 
