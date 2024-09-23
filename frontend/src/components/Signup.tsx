@@ -27,7 +27,7 @@ const Signup = () => {
       setError("All Fields are required.")
     } else {
       setIsLoading(true)
-      const response = await axios.post("http://localhost:8000/api/v1/auth/register", formdata)
+      const response = await axios.post("http://localhost:8000/api/v1/auth/signup", formdata)
       const response_data = response.data
       setIsLoading(false)
       if (response.status === 201) {
