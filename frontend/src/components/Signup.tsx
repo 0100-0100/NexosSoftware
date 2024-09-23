@@ -21,18 +21,39 @@ const Signup = () => {
   }
   const {email, username, password, password2} = formdata
 
+  async function postSignUp (formdata: any) {
+    try {
+      const response = await axios.post("http://localhost:8000/api/v1/auth/signup", formdata)
+      return response
+    } catch (error: any) {
+      console.log(error.response.data)
+      let message = ''
+      for (let i in error.response.data) {
+        message = message.concat(message, `${error.response.data[i].join('\n')}\n\n`)
+      }
+      console.log(message)
+      setError(message)
+      return error
+    }
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     if (!email || !username || !password || !password2) {
       setError("All Fields are required.")
     } else {
+
       setIsLoading(true)
-      const response = await axios.post("http://localhost:8000/api/v1/auth/signup", formdata)
-      const response_data = response.data
+      const response = await postSignUp(formdata)
       setIsLoading(false)
+
+      if (response.status === 400) {
+        toast.error(response.message)
+        return
+      }
       if (response.status === 201) {
         navigate("/otp/verify")
-        toast.success(response_data.message)
+        toast.success(response.data.message)
       }
     }
   }
