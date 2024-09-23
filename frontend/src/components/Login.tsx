@@ -29,7 +29,7 @@ const Login = () => {
       }
       if (response.status === 200) {
         localStorage.setItem("user", JSON.stringify(user))
-        localStorage.setItem("accessToken", JSON.stringify(response_data.access_token))
+        localStorage.setItem("token", JSON.stringify(response_data.access_token))
         localStorage.setItem("refreshToken", JSON.stringify(response_data.refresh_token))
         toast.success('Successful Login.')
         navigate("/profile")
