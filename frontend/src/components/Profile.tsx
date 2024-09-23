@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AxiosInstance from "../utils/AxiosInstace"
 import { toast } from 'react-toastify'
@@ -8,15 +8,16 @@ const Profile = () => {
   const user = localStorage.getItem('user')
         ? JSON.parse(localStorage.getItem('user') as string)
         : ""
-  const accessToken = localStorage.getItem('accessToken')
+  const accessToken = localStorage.getItem('refreshToken')
 
   useEffect(() => {
     if (accessToken === null && !user) {
       navigate('/login')
     } else {
       const userData = getData()
+      console.log(userData)
     }
-  }, [accessToken, user])
+  }, [accessToken, user, navigate])
 
   const getData = async () => {
     const response = await AxiosInstance.get('/auth/test')
