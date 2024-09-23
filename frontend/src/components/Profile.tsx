@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import AxiosInstance from "../utils/AxiosInstace"
+import AxiosInstance from "../utils/AxiosInstance"
 import { toast } from 'react-toastify'
 
 const Profile = () => {
