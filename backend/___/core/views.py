@@ -1,23 +1,22 @@
-from rest_framework import status
-from rest_framework.generics import GenericAPIView
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
-from . import serializers
-from .models import CoreUser, OneTimePassword
-from .utils import send_otp_code_to_user
-
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.cache import cache
 from django.shortcuts import render, redirect
 from django.utils.encoding import smart_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode
 
+from rest_framework import status
+from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
+
+from . import serializers
+from .models import CoreUser, OneTimePassword
+from .utils import send_otp_code_to_user
+
 import time
 
 
-class TestGetUsersEndpoint(APIView):
+class TestGetUsersEndpoint(GenericAPIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -30,15 +29,10 @@ class TestGetUsersEndpoint(APIView):
         } for user in users]
         return Response(response, status=status.HTTP_200_OK)
 
-    def post(self, request):
-        serializer = serializers.CoreUserRegisterSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
 
-
-class RegisterUserView(GenericAPIView):
+class SignUpView(GenericAPIView):
     serializer_class = serializers.CoreUserRegisterSerializer
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         user_data = request.data
@@ -54,7 +48,9 @@ class RegisterUserView(GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class VerifyUserEmail(GenericAPIView):
+class VerifyEmailView(GenericAPIView):
+    permission_classes = (AllowAny,)
+
     def post(self, request):
         otpcode = request.data.get('otp')
         try:
@@ -83,6 +79,7 @@ class VerifyUserEmail(GenericAPIView):
 
 class LoginUserView(GenericAPIView):
     serializer_class = serializers.CoreUserLoginSerializer
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         serializer = self.serializer_class(
