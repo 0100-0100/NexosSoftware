@@ -1,4 +1,5 @@
 services:
+
   frontend:
     container_name: react
     depends_on:
@@ -8,9 +9,13 @@ services:
       context: ./frontend
       dockerfile: ./Dockerfile
     ports:
-     - 3000:3000
+      - 3000:3000
     volumes:
-     - ./frontend/:/frontend
+      - ./frontend/:/frontend
+    command: >
+      sh -c 'npm run build &&
+      npm install -g serve &&
+      serve -s build'
 
   backend:
     container_name: django
@@ -33,6 +38,9 @@ services:
       python3 -m gunicorn ___.asgi:application -b 0.0.0.0:8000 -k uvicorn_worker.UvicornWorker'
     healthcheck:
        test: ["CMD", "python3", "manage.py", "check"]
+       interval: 30s
+       timeout: 10s
+       retries: 3
 
   db:
     image: postgres
@@ -45,7 +53,10 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-d", "django_backend_db"]
+      test: ["CMD-SHELL", "pg_isready", "postgress", "-d", "django_backend_db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   cache:
     image: redis
@@ -53,4 +64,7 @@ services:
     ports:
       - 6379:6379
     healthcheck:
-      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
