@@ -1,5 +1,5 @@
 # NexosSoftware - Technical Challenge
-[![CI Pipeline](https://github.com/0100-0100/NexosSoftware/actions/workflows/docker-image.yml/badge.svg?branch=main&event=check_run)](https://github.com/0100-0100/NexosSoftware/actions/workflows/docker-image.yml)
+[![CI Pipeline](https://github.com/0100-0100/NexosSoftware/actions/workflows/actions.yml/badge.svg)](https://github.com/0100-0100/NexosSoftware/actions/workflows/actions.yml)
 #### This is the repository storing the codebase of the technical test sent in by Nexos Software - Colombia on September 18 2024
 
 ---
