@@ -21,7 +21,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY ./___ ./___
 
 RUN mkdir /___/static
-RUN python3 ./___/manage.py collectstatic --noinput
+RUN python3 manage.py collectstatic --noinput
 
 EXPOSE 8000
 CMD ["python3", "-m", "gunicorn", "___.asgi:application", "-b", "0.0.0.0:8000", "-k", "uvicorn_worker.UvicornWorker"]
