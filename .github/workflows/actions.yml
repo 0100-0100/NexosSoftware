@@ -44,5 +44,5 @@ jobs:
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - run: echo "🛠 Running ./docker.sh file."
 
-      - name: Execute ./docker.sh file
-        run: ./docker.sh
+      #- name: Execute ./docker.sh file
+        #run: ./docker.sh
