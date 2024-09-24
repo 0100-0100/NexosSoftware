@@ -17,8 +17,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Checkout code
-        run: 
+      - name: Check Current WOrking Directory
+        run: pwd
 
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
