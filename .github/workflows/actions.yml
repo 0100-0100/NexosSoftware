@@ -51,17 +51,14 @@ jobs:
           echo "EMAIL_PORT=${{ vars.EMAIL_PORT }}" >> .env
           echo "EMAIL_USE_TLS=${{ vars.EMAIL_USE_TLS }}" >> .env
 
-      - name: Check for .env file
+      - name: LS .env file
         run: ls -la .env
 
-      - name: Check for .env file
-        run: cat .env
+      - name: CP .env to ./backend/___ DIR
+        run: cp .env ./backend/___
 
-      - name: Check PWD
-        run: pwd
-
-      - name: Check PWD
-        run: ls -la .
+      - name: LS ./backend/___/.env file
+        run: ls -la ./backend/___/.env
 
       - name: 🛠 Running ./docker.sh file
         run: ./docker.sh
