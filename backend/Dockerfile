@@ -3,7 +3,7 @@ ENV PYTHONBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN mkdir /___/
-COPY .env /___/.env
+# COPY ./.env /___/.env
 WORKDIR /___/
 
 RUN adduser --system --group django
