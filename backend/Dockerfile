@@ -16,6 +16,7 @@ RUN pip3 install -Ur requirements.txt
 FROM python AS runner
 WORKDIR /___/
 COPY --from=compiler /opt/venv /opt/venv
+COPY ./.env ./.env
 
 ENV PATH="/opt/venv/bin:$PATH"
 COPY ./___ ./___
