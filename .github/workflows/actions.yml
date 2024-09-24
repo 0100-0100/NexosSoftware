@@ -35,13 +35,13 @@ jobs:
           DEFAULT_FROM_EMAIL: ${{ vars.DEFAULT_FROM_EMAIL }}
           EMAIL_PORT: ${{ vars.EMAIL_PORT }}
           EMAIL_USE_TLS: ${{ vars.EMAIL_USE_TLS }}
-          # directory: <directory_name>
+          directory: /home/runner/work/NexosSoftware/NexosSoftware
           file_name: .env
           fail_on_empty: false
           sort_keys: false
 
       - name: Check ENV
-        run: env
+        run: ls .env
         
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
