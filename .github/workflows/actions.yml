@@ -34,7 +34,7 @@ jobs:
           EMAIL_USE_TLS: ${{ vars.EMAIL_USE_TLS }}
           directory: ./
           file_name: .env
-          fail_on_empty: false
+          fail_on_empty: true
           sort_keys: false
 
       - name: Check for .env file
