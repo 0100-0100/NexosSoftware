@@ -1,0 +1,23 @@
+name: CI Pipeline
+run-name: ${{ github.actor }} is testing out GitHub Actions ≡ƒÜÇ
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - run: echo "🛠 Running ./docker.sh file."
+      - name: Execute ./docker.sh file
+        run: ./docker.sh
