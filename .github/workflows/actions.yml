@@ -1,7 +1,5 @@
 name: CI Pipeline
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -15,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check Current WOrking Directory
+      - name: Check Current Working Directory
         run: pwd
 
       - name: Make envfile
@@ -35,14 +33,16 @@ jobs:
           DEFAULT_FROM_EMAIL: ${{ vars.DEFAULT_FROM_EMAIL }}
           EMAIL_PORT: ${{ vars.EMAIL_PORT }}
           EMAIL_USE_TLS: ${{ vars.EMAIL_USE_TLS }}
-          directory: /home/runner/work/NexosSoftware/NexosSoftware
+
+          directory: NexosSoftware
+
           file_name: .env
           fail_on_empty: false
           sort_keys: false
 
-      - name: Check ENV
-        run: ls .env
-        
+      - name: Check for .env file
+        run: ls -la .env
+
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - run: echo "🛠 Running ./docker.sh file."
