@@ -8,6 +8,7 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+# from rest_framework.views import APIView
 
 from . import serializers
 from .models import CoreUser, OneTimePassword
@@ -28,6 +29,12 @@ class TestGetUsersEndpoint(GenericAPIView):
             'date_joined': user.date_joined
         } for user in users]
         return Response(response, status=status.HTTP_200_OK)
+
+    # def post(self, request):
+    #     serializer = serializers.CoreUserRegisterSerializer(data=request.data)
+    #     if serializer.is_valid(raise_exception=True):
+    #         serializer.save()
+    #         return Response(serializer.data)
 
 
 class SignUpView(GenericAPIView):
