@@ -33,9 +33,6 @@ services:
      - ./backend/___:/___
     env_file:
       - .env
-    command: >
-      sh -c 'python3 manage.py migrate &&
-      python3 -m gunicorn ___.asgi:application -b 0.0.0.0:8000 -k uvicorn_worker.UvicornWorker'
     healthcheck:
        test: ["CMD", "python3", "manage.py", "check"]
        interval: 30s
