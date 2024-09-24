@@ -70,19 +70,19 @@ const Signup = () => {
             <p style={{color: "red", padding: "1px"}}>{error ? error: ""} </p>
             <div className='form-group'>
               <label htmlFor="">Email Address:</label>
-              <input className='email-form' value={email} onChange={handleOnChange} name="email" type="text"/>
+              <input className='email-form' value={email} onChange={handleOnChange} name="email" type="text" autoComplete="username" />
             </div>
             <div className='form-group'>
               <label htmlFor="">Username:</label>
-              <input className='username-form' value={username} onChange={handleOnChange} name="username" type="text"/>
+              <input className='username-form' value={username} onChange={handleOnChange} name="username" type="text" autoComplete="username" />
             </div>
             <div className='form-group'>
               <label htmlFor="">Password:</label>
-              <input className='password-form' value={password} onChange={handleOnChange} name="password" type="password" />
+              <input className='password-form' value={password} onChange={handleOnChange} name="password" type="password" autoComplete="current-password" />
             </div>
             <div className='form-group'>
               <label htmlFor="">Confirm Password:</label>
-              <input className='confirm-password-form' value={password2} onChange={handleOnChange} name="password2" type="password"/>
+              <input className='confirm-password-form' value={password2} onChange={handleOnChange} name="password2" type="password" autoComplete="new-password"/>
             </div>
             <input className="submitButton" type="submit" value="Submit" />
           </form>
