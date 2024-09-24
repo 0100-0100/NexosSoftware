@@ -32,7 +32,6 @@ const Login = () => {
           navigate("/profile")
         }
       } catch (error: any) {
-        console.log(error)
         toast.error(error.response?.data?.detail || 'Error Logging in!!')
       }
     }
