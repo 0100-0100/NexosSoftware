@@ -10,21 +10,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      POSTGRES_ENGINE: 'django.db.backends.postgresql'
-      POSTGRES_DB: 'django_backend_db'
-      POSTGRES_USER: 'django_backend_user'
-      POSTGRES_PASSWORD: '123'
-      POSTGRES_PORT: '5432'
-      ROOT_POSTGRES_PASSWORD: '1234'
-      POSTGRES_HOST: 'postgres'
-      REDIS_HOST: 'redis'
-      EMAIL_HOST: 'sandbox.smtp.mailtrap.io'
-      EMAIL_HOST_USER: '6d42feb25888c4'
-      EMAIL_HOST_PASSWORD: 'c0f96201691240'
-      DEFAULT_FROM_EMAIL: 'admin@email.com'
-      EMAIL_PORT: '2525'
-      EMAIL_USE_TLS: True
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
