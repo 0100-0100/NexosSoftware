@@ -18,7 +18,7 @@ WORKDIR /___/
 COPY --from=compiler /opt/venv /opt/venv
 
 ENV PATH="/opt/venv/bin:$PATH"
-COPY ./backend/___ ./___
+COPY ./___ ./___
 
 RUN mkdir /static
 RUN python3 manage.py collectstatic --noinput
