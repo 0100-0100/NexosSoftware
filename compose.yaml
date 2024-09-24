@@ -47,14 +47,14 @@ services:
     image: postgres
     container_name: postgres
     user: postgres
-    env_file:
-      - .env
+    environment:
+      POSTGRES_PASSWORD: ${ROOT_POSTGRES_PASSWORD}
     ports:
       - 5432:5432
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-U", "django_backend_user", "-d", "django_backend_db"]
+      test: ["CMD-SHELL", "pg_isready", "-d", "django_backend_db"]
       interval: 30s
       timeout: 10s
       retries: 3
