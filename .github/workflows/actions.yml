@@ -1,1 +1,64 @@
-../../actions.yml
+name: CI Pipeline
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+      ROOT_POSTGRES_PASSWORD: ${{ vars.ROOT_POSTGRES_PASSWORD }}
+      POSTGRES_ENGINE: ${{ vars.POSTGRES_ENGINE }}
+      POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+      POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASSWORD }}
+      POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
+      ROOT_POSTGRES_PASSWORD: ${{ vars.ROOT_POSTGRES_PASSWORD }}
+      POSTGRES_HOST: ${{ vars.POSTGRES_HOST }}
+      REDIS_HOST: ${{ vars.REDIS_HOST }}
+      EMAIL_HOST: ${{ vars.EMAIL_HOST }}
+      EMAIL_HOST_USER: ${{ vars.EMAIL_HOST_USER }}
+      EMAIL_HOST_PASSWORD: ${{ vars.EMAIL_HOST_PASSWORD }}
+      DEFAULT_FROM_EMAIL: ${{ vars.DEFAULT_FROM_EMAIL }}
+      EMAIL_PORT: ${{ vars.EMAIL_PORT }}
+      EMAIL_USE_TLS: ${{ vars.EMAIL_USE_TLS }}
+
+    steps:
+
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create .env 🤫
+        run: |
+          echo "POSTGRES_ENGINE=${{ vars.POSTGRES_ENGINE }}" >> .env
+          echo "POSTGRES_DB=${{ vars.POSTGRES_DB }}" >> .env
+          echo "POSTGRES_USER=${{ vars.POSTGRES_USER }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ vars.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_PORT=${{ vars.POSTGRES_PORT }}" >> .env
+          echo "ROOT_POSTGRES_PASSWORD=${{ vars.ROOT_POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_HOST=${{ vars.POSTGRES_HOST }}" >> .env
+          echo "REDIS_HOST=${{ vars.REDIS_HOST }}" >> .env
+          echo "EMAIL_HOST=${{ vars.EMAIL_HOST }}" >> .env
+          echo "EMAIL_HOST_USER=${{ vars.EMAIL_HOST_USER }}" >> .env
+          echo "EMAIL_HOST_PASSWORD=${{ vars.EMAIL_HOST_PASSWORD }}" >> .env
+          echo "DEFAULT_FROM_EMAIL=${{ vars.DEFAULT_FROM_EMAIL }}" >> .env
+          echo "EMAIL_PORT=${{ vars.EMAIL_PORT }}" >> .env
+          echo "EMAIL_USE_TLS=${{ vars.EMAIL_USE_TLS }}" >> .env
+
+      - name: Check for .env file
+        run: ls -la .env
+
+      - name: Check for .env file
+        run: cat .env
+
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - run: echo "🛠 Running ./docker.sh file."
+
+      - name: Execute ./docker.sh file
+        run: ./docker.sh
