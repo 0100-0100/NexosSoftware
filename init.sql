@@ -3,7 +3,7 @@ WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'django_backend_db')\g
 DO
 $$
 BEGIN
-  if NOT EXISTS (SELECT * FROM pg_user WHERE usename = 'new_role') THEN
+  if NOT EXISTS (SELECT * FROM pg_user WHERE usename = 'django_backend_user') THEN
      CREATE USER django_backend_user WITH ENCRYPTED PASSWORD '123';
   END if;
 END
