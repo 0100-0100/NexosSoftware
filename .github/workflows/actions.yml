@@ -2,6 +2,8 @@ name: CI Pipeline
 on:
   pull_request:
     branches: [ "main" ]
+env:
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
 
 jobs:
 
@@ -13,10 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check Current Working Directory
-        run: pwd
-
-      - name: Make envfile
+      - name: Create .env 🤫
         uses: SpicyPizza/create-envfile@v2.0
         with:
           POSTGRES_ENGINE: ${{ vars.POSTGRES_ENGINE }}
@@ -37,6 +36,9 @@ jobs:
           file_name: .env
           fail_on_empty: false
           sort_keys: false
+
+      - name: Check for .env file
+        run: ls -la .env
 
       - name: Check for .env file
         run: cat .env
