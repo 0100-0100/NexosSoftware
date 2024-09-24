@@ -33,7 +33,7 @@ jobs:
           DEFAULT_FROM_EMAIL: ${{ vars.DEFAULT_FROM_EMAIL }}
           EMAIL_PORT: ${{ vars.EMAIL_PORT }}
           EMAIL_USE_TLS: ${{ vars.EMAIL_USE_TLS }}
-          directory: ~/runner/work/NexosSoftware/NexosSoftware
+          directory: NexosSoftware
           file_name: .env
           fail_on_empty: false
           sort_keys: false
