@@ -62,3 +62,6 @@ jobs:
 
       - name: Running ./docker.sh file 🛠
         run: ./docker.sh
+
+      - name: Check the services are running 💡
+        run: curl localhost:3000
