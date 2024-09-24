@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ "main" ]
 env:
-  env_var: ${{ vars.ENV_CONTEXT_VAR }}
+  vars: ${{ vars.ENV_CONTEXT_VAR }}
 
 jobs:
 
