@@ -20,7 +20,7 @@ COPY --from=compiler /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 COPY ./___ ./___
 
-RUN mkdir /static
+RUN mkdir ./___/static
 RUN python3 manage.py collectstatic --noinput
 
 EXPOSE 8000
