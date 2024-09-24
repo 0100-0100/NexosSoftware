@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ROOT_POSTGRES_PASSWORD: ${{ vars.ROOT_POSTGRES_PASSWORD }}
       POSTGRES_ENGINE: ${{ vars.POSTGRES_ENGINE }}
       POSTGRES_DB: ${{ vars.POSTGRES_DB }}
       POSTGRES_USER: ${{ vars.POSTGRES_USER }}
