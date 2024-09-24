@@ -8,6 +8,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    env:
+      ROOT_POSTGRES_PASSWORD: ${{ vars.ROOT_POSTGRES_PASSWORD }}
+
     steps:
 
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
