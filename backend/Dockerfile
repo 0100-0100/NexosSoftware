@@ -20,4 +20,3 @@ COPY --from=compiler /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 COPY ./___ ./___
 RUN python3 ./___/manage.py collectstatic --noinput
-RUN python3 ./___/manage.py makemigrations
