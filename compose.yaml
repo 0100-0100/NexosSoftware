@@ -12,10 +12,6 @@ services:
       - 3000:3000
     volumes:
       - ./frontend/:/frontend
-    command: >
-      sh -c 'npm run build &&
-      npm install -g serve &&
-      serve -s build'
 
   backend:
     container_name: django
