@@ -6,6 +6,7 @@ import AxiosInstance from '../utils/AxiosInstance'
 
 const Login = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false)
   const [loginData, setLoginData] = useState({
     email: "",
     password: ""
@@ -19,7 +20,9 @@ const Login = () => {
     e.preventDefault()
     if (loginData) {
       try {
+        setIsLoading(true)
         const response = await AxiosInstance.post("auth/login", loginData)
+        setIsLoading(false)
         const user = {
           "email": response.data.email,
           "username": response.data.username
@@ -32,10 +35,12 @@ const Login = () => {
           navigate("/profile")
         }
       } catch (error: any) {
+        setIsLoading(false)
         toast.error(error.response?.data?.detail || 'Error Logging in!!')
       }
     }
   }
+
   return (
     <div>
       <div className='form-container'>
@@ -49,9 +54,11 @@ const Login = () => {
             <div className='form-group'>
               <label htmlFor="">Password:</label>
               <input className='password-form' value={loginData.password} onChange={handleOnChange} name="password" type="password" autoComplete="current-password" />
-            </div >
-            <input className="submitButton" type="submit" value="Login" />
+            </div>
+            <input className="Button" value={isLoading ? "Loading..." :"Login"} type="submit" disabled={isLoading} />
           </form>
+          <p>Don't have an account yet? </p>
+          <input className="Button" onClick={() => {navigate("/signup")}} value="Sign Up" disabled={isLoading} />
         </div>
       </div>
     </div>
