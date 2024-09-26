@@ -14,6 +14,7 @@ RUN pnpm install
 RUN pnpm audit
 RUN pnpm audit --fix
 RUN pnpm install
+RUN pnpm update
 RUN pnpm run build --outdir=build
 # RUN pnpm install -g serve
 # CMD ["serve", "-s", "build"]
