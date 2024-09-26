@@ -9,12 +9,14 @@ RUN mkdir /frontend
 WORKDIR /frontend
 
 COPY . ./
+
 RUN pnpm fetch --prod
 RUN pnpm install
+RUN pnpm update
 RUN pnpm audit
 RUN pnpm audit --fix
 RUN pnpm install
-RUN pnpm update
+RUN pnpm tailwindcss -i ./src/App.css -o ./src/tailwind.css
 RUN pnpm run build --outdir=build
 # RUN pnpm install -g serve
 # CMD ["serve", "-s", "build"]
