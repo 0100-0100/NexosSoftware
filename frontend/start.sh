@@ -1,9 +1,9 @@
-RUN pnpm fetch --prod &&
-RUN pnpm install &&
-RUN pnpm audit &&
-RUN pnpm audit --fix &&
-RUN pnpm install &&
-RUN pnpm update &&
-RUN pnpm run build --outdir=build &&
+pnpm fetch --prod &&
+pnpm install &&
+pnpm update &&
+pnpm audit &&
+pnpm audit --fix &&
+pnpm install &&
+pnpm run build --outdir=build &&
 pnpm install -g serve &&
 serve -s build
