@@ -18,12 +18,12 @@ const Profile = () => {
       const response = await AxiosInstance.post('/auth/logout', {'refresh': refresh})
       if (response.status === 204) {
         localStorage.clear()
-        navigate('/login')
+        navigate('/')
         toast.success('You have logged out')
       }
     } catch (error) {
       localStorage.clear()
-      navigate('/login')
+      navigate('/')
       toast.success('Session Timeout')
     }
   }, [navigate, refresh])
@@ -39,7 +39,7 @@ const Profile = () => {
         }
       } else {
         toast.error('Please Login First.')
-        navigate('/login')
+        navigate('/')
       }
     }
     fetchData()

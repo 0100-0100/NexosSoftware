@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { toast } from 'react-toastify'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import 'react-toastify/dist/ReactToastify.css';
+import { useState, ReactNode } from 'react'
+import { toast } from 'react-toastify'
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -13,7 +12,7 @@ const Signup = () => {
     password2: ""
   })
 
-  const [error, setError] = useState("")
+  const [error, setError] = useState<ReactNode>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleOnChange = (e: any) => {
@@ -26,13 +25,15 @@ const Signup = () => {
       const response = await axios.post("http://localhost:8000/api/v1/auth/signup", formdata)
       return response
     } catch (error: any) {
+      let elements = []
       console.log(error.response.data)
-      let message = ''
       for (let i in error.response.data) {
-        message = message.concat(message, `${error.response.data[i].join('\n')}\n\n`)
+        for (let j in error.response.data[i]) {
+          elements.push(<p>{error.response.data[i][j]}</p>)
+        }
       }
-      console.log(message)
-      setError(message)
+      setIsLoading(false)
+      setError(<>{elements}</>)
       return error
     }
   }
@@ -40,19 +41,15 @@ const Signup = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     if (!email || !username || !password || !password2) {
-      setError("All Fields are required.")
+      setError(<p>All Fields are required.</p>)
     } else {
 
       setIsLoading(true)
       const response = await postSignUp(formdata)
       setIsLoading(false)
 
-      if (response.status === 400) {
-        toast.error(response.message)
-        return
-      }
       if (response.status === 201) {
-        navigate("/otp/verify")
+        navigate("/verify")
         toast.success(response.data.message)
       }
     }
@@ -63,9 +60,6 @@ const Signup = () => {
       <div className='form-container'>
         <div style={{width: "100%"}} className='wrapper' >
           <h2>Create Account</h2>
-          {isLoading && (
-            <h2>Loading...</h2>
-          )}
           <form onSubmit={handleSubmit}>
             <p style={{color: "red", padding: "1px"}}>{error ? error: ""} </p>
             <div className='form-group'>
@@ -84,14 +78,10 @@ const Signup = () => {
               <label htmlFor="">Confirm Password:</label>
               <input className='confirm-password-form' value={password2} onChange={handleOnChange} name="password2" type="password" autoComplete="new-password"/>
             </div>
-            <input className="submitButton" type="submit" value="Submit" />
+            <input className="Button" type="submit" value={isLoading ? "Loading..." :"Sign Up"} disabled={isLoading}/>
           </form>
-          {/*
-              <h3 className='text-option'>Or</h3>
-          <div className='googleContainer'>
-            <button>Sign up with Google</button>
-          </div>
-           */}
+          <p>Already have an account?</p>
+          <input className="Button" onClick={() => { navigate("/") }} value="Login" />
         </div>
       </div>
     </div>

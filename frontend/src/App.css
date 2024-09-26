@@ -68,16 +68,12 @@
 }
 
 form{
-    padding: 22px;
-    margin-top: 10px;
-    margin-bottom: 1rem;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 600px;
-    width: 60%;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+  padding: 20px;
+  max-width: 600px;
+  width: 60%;
+  background-color: #FFF;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
 }
 
 .googleContainer{
@@ -86,8 +82,8 @@ form{
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
-
 }
+
 .githubContainer{
   width: 100%;
   padding: 10px;
@@ -95,6 +91,7 @@ form{
   justify-content: center;
   margin-bottom: 10px;
 }
+
 .githubContainer button{
   padding: 4px 8px;
   width: 280px;
@@ -102,17 +99,18 @@ form{
   font-weight: 600;
   border-radius: 10px;
 }
+
 .githubContainer button:hover{
   background-color: #3d3d3d;
   color: #fff;
   cursor: pointer;
 }
 
-
 .form-group{
   width: 100%;
   margin-bottom: 10px;
 }
+
 h2 {
   border-bottom: 1px solid white;
   color: #3d3d3d;
@@ -123,6 +121,7 @@ h2 {
   padding: 8px;
   text-align: center;
 }
+
 .container{
   width: 100%;
   display: flex;
@@ -139,6 +138,7 @@ input {
   width: 100%;
   outline: none;
 }
+
 input:focus{
   border-color: #848fdf;
   border-width: 1px;
@@ -152,26 +152,35 @@ label {
   font-weight: 500;
   margin-bottom: 5px;
 }
-.submitButton {
+
+.Button {
   background-color: #6976d9;
   color: white;
   font-family: sans-serif;
   font-size: 14px;
-  margin: 20px 0px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  /* color: #6976d9; */
+  /* border: solid 1px #6976d9; */
+  border-radius: 5px;
 }
+
 .vbtn{
- padding:10px 22px;
- outline: none;
- font-size: 14px;
- font-weight: 600;
- background-color: #6976d9;
- border: none;
- color: #fff;
- border-radius: 5px;
+  padding:10px 22px;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #6976d9;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
 }
+
 h3{
   margin: 0
 }
+
 .logout-btn{
   padding:10px 22px;
   outline: none;
@@ -184,10 +193,9 @@ h3{
   border-radius: 5px;
 }
 
-
 profileContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100vh;
 }

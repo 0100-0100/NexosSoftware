@@ -9,10 +9,10 @@ function App() {
     <Router>
       <ToastContainer/>
       <Routes>
-        <Route path='/' element={<Signup/>} />
-        <Route path='/login' element={<Login/>} />
+        <Route path='/' element={<Login/>} />
+        <Route path='/signup' element={<Signup/>} />
+        <Route path='/verify' element={<VerifyEmail/>} />
         <Route path='/profile' element={<Profile/>} />
-        <Route path='/otp/verify' element={<VerifyEmail/>} />
         <Route path='/forget_password' element={<ForgetPassword/>} />
       </Routes>
     </Router>
