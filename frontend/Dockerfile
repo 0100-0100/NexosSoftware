@@ -16,7 +16,7 @@ RUN pnpm update
 RUN pnpm audit
 RUN pnpm audit --fix
 RUN pnpm install
-RUN pnpm tailwindcss -i ./src/App.css -o ./src/tailwind.css
+RUN pnpm tailwindcss -i ./src/index.css -o ./src/tailwind.css
 RUN pnpm run build --outdir=build
 # RUN pnpm install -g serve
 # CMD ["serve", "-s", "build"]
