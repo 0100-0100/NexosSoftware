@@ -56,14 +56,16 @@ You can also execute all the following docker commands manually:
 ``` bash
     docker stop $(docker ps -a -q) 2>>/dev/null;
     docker rm $(docker ps -a -q) 2>>/dev/null;
-    docker compose pull && docker compose build && docker compose up
+    docker compose pull && docker compose build && docker compose up -d
 ```
 Take into account that by running these commands you will stop and removem all the currently active docker containers.
 
 The compose.yaml file includes configurations for initializing the PostgreSQL Database Server in order to be ready for Django,
 Here you can see the init.sql file used for the postgres container:
 ``` sql
-CREATE DATABASE django_backend_db;
+SELECT 'CREATE DATABASE django_backend_db;'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'django_backend_db')\gexec
+
 CREATE USER django_backend_user WITH ENCRYPTED PASSWORD '123';
 ALTER ROLE django_backend_user SET client_encoding TO 'utf8';
 ALTER ROLE django_backend_user SET default_transaction_isolation TO 'read committed';
