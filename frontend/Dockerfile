@@ -18,7 +18,8 @@ RUN pnpm run build --outdir=build
 # RUN pnpm install -g serve
 # CMD ["serve", "-s", "build"]
 
-FROM nginx
+FROM nginx:latest
 COPY --from=build /frontend/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx-server /etc/nginx/sites-available
 RUN ln -s /etc/nginx/sites-available/nginx-server /etc/nginx/sites-enabled
