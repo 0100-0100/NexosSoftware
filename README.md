@@ -29,8 +29,6 @@ Python3.12 - Django - Django Rest Framework - Docker - Node - TypeScript - Axios
 ### 1
 You need to setup a .env file on the root of the project so that docker the current environment variables are configured.
 ``` bash
-    DJANGO_SECRET_KEY='django-insecure-wxwn^@sq5fimfy^sg_%_thty)y&umyv1+xr%j$97kgdoku9)mt'
-
     POSTGRES_ENGINE='django.db.backends.postgresql'
     POSTGRES_DB='django_backend_db'
     POSTGRES_USER='django_backend_user'
