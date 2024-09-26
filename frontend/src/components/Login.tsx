@@ -1,46 +1,6 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import AxiosInstance from '../utils/AxiosInstance'
-
-
+import { useLogin } from 'hooks'
 const Login = () => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false)
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: ""
-  })
-
-  const handleOnChange = (e: any) => {
-    setLoginData({...loginData, [e.target.name]: e.target.value})
-  }
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    if (loginData) {
-      try {
-        setIsLoading(true)
-        const response = await AxiosInstance.post("auth/login", loginData)
-        setIsLoading(false)
-        const user = {
-          "email": response.data.email,
-          "username": response.data.username
-        }
-        if (response.status === 200) {
-          localStorage.setItem("user", JSON.stringify(user))
-          localStorage.setItem("accessToken", JSON.stringify(response.data.access_token))
-          localStorage.setItem("refreshToken", JSON.stringify(response.data.refresh_token))
-          toast.success('Successful Login.')
-          navigate("/profile")
-        }
-      } catch (error: any) {
-        setIsLoading(false)
-        toast.error(error.response?.data?.detail || 'Error Logging in!!')
-      }
-    }
-  }
-
+  const { loginData, isLoading, handleOnChange, handleSubmit, navigate} = useLogin()
   return (
     <div>
       <div className='form-container'>
@@ -64,4 +24,5 @@ const Login = () => {
     </div>
   )
 }
+
 export default Login
