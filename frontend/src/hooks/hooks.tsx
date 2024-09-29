@@ -1,13 +1,9 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useCallback, useEffect, useState, ReactNode } from 'react'
 import { toast } from 'react-toastify'
 import AxiosInstance from 'utils/AxiosInstance'
 import axios from 'axios'
 
-
-function useForgetPassword() {
-  return
-}
 
 function useLogin() {
   const navigate = useNavigate();
@@ -18,7 +14,7 @@ function useLogin() {
   })
 
   const handleOnChange = (e: any) => {
-    setLoginData({...loginData, [e.target.name]: e.target.value})
+    setLoginData({ ...loginData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e: any) => {
@@ -58,7 +54,7 @@ function useProfile() {
 
   const handleLogout = useCallback(async () => {
     try {
-      const response = await AxiosInstance.post('/auth/logout', {'refresh': refresh})
+      const response = await AxiosInstance.post('/auth/logout', { 'refresh': refresh })
       if (response.status === 204) {
         localStorage.clear()
         navigate('/')
@@ -88,7 +84,7 @@ function useProfile() {
     fetchData()
   }, [handleLogout, navigate, access, user])
 
-  return {user, usersData, handleLogout}
+  return { user, usersData, handleLogout }
 }
 
 function useSignup() {
@@ -104,10 +100,10 @@ function useSignup() {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleOnChange = (e: any) => {
-    setFormData({...formData, [e.target.name]: e.target.value})
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  async function postSignUp (formdata: any) {
+  async function postSignUp(formdata: any) {
     try {
       const response = await axios.post("http://localhost:8000/api/v1/auth/signup", formdata)
       return response
@@ -163,4 +159,80 @@ function useVerifyEmail() {
   return { otp, setOtp, handleSubmit }
 }
 
-export { useLogin, useForgetPassword, useProfile, useSignup, useVerifyEmail }
+function useForgotMyPassword() {
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [email, setEmail] = useState("")
+
+  const handleOnChange = (e: any) => {
+    setEmail(e.target.value)
+  }
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    if (email) {
+      try {
+        setIsLoading(true)
+        const response = await axios.post("http://127.0.0.1:8000/api/v1/auth/forgot-my-password", {'email': email})
+        setIsLoading(false)
+
+        if (response.status === 404) {
+          let message = 'Not Found'
+          toast.error(message)
+          setError(message)
+        }
+
+        if (response.status === 202) {
+          navigate('/forgot-my-password')
+          toast.success(response.data.message)
+        }
+      } catch (error: any) {
+        setIsLoading(false)
+        setError(error.response?.data?.detail || 'Error Sending email address in A!!')
+        toast.error(error.response?.data?.detail || 'Error Sending email address in B!!')
+        return error
+      }
+    }
+  }
+  // const fields = [email]
+  return { email, isLoading, handleOnChange, handleSubmit, error}
+}
+
+function useResetPassword() {
+  const navigate=useNavigate()
+  const { uid, token } = useParams()
+  const [ formData, setNewPassword ]=useState({
+    password:"",
+    confirm_password:"",
+  })
+  const {password, confirm_password} = formData
+
+  const handleChange=(e: any)=>{
+    setNewPassword({...formData, [e.target.name]:e.target.value})
+  }
+
+  const data = {
+    "password":password,
+    "confirm_password":confirm_password,
+    "uidb64":uid,
+    "token": token,
+  }
+
+  const handleSubmit = async (e: any)=>{
+    e.preventDefault()
+    if (data) {
+      const res = await AxiosInstance.patch('/auth/set-new-password', data)
+      const response = res.data
+      if (res.status === 200) {
+        navigate('/')
+        toast.success(response.message)
+      }
+      console.log(response)
+    }
+  }
+  return {  formData, handleChange, handleSubmit }
+}
+
+
+export { useLogin, useForgotMyPassword, useResetPassword, useProfile, useSignup, useVerifyEmail }
