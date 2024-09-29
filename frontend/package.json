@@ -6,8 +6,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.111",
-    "@types/react": "^18.3.9",
+    "@types/node": "^16.18.112",
+    "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.7",
     "dayjs": "^1.11.13",
@@ -58,5 +58,6 @@
       "nth-check@<2.0.1": ">=2.0.1",
       "rollup@<3.29.5": ">=3.29.5"
     }
-  }
+  },
+  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b"
 }
