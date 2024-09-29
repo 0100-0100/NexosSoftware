@@ -1,6 +1,6 @@
 import { useForgotMyPassword } from 'hooks/hooks';
 import BaseView from 'components/BaseView'
-// import InputCard from 'components/Card'
+// import InputCard from 'components/InputCard'
 
 const ForgetPassword = () => {
   const { email, isLoading, handleOnChange, handleSubmit, error } = useForgotMyPassword();
