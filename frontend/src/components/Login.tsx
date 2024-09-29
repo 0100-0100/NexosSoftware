@@ -1,4 +1,5 @@
 import { useLogin } from 'hooks'
+
 const Login = () => {
   const { loginData, isLoading, handleOnChange, handleSubmit, navigate} = useLogin()
   return (
@@ -19,6 +20,7 @@ const Login = () => {
           </form>
           <p>Don't have an account yet? </p>
           <input className="Button" onClick={() => {navigate("/signup")}} value="Sign Up" disabled={isLoading} />
+          <input className="Button" onClick={() => {navigate("/forgot-my-password")}} value="Forgot your password?" disabled={isLoading} />
         </div>
       </div>
     </div>
