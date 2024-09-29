@@ -1,7 +1,8 @@
-import { useForgetPassword, useLogin, useProfile, useSignup, useVerifyEmail } from "./hooks"
+import { useForgotMyPassword, useResetPassword, useLogin, useProfile, useSignup, useVerifyEmail } from "./hooks"
 
 export {
-  useForgetPassword,
+  useForgotMyPassword,
+  useResetPassword,
   useLogin,
   useProfile,
   useSignup,
