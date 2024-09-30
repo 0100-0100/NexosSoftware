@@ -18,6 +18,8 @@ RUN pnpm audit --fix
 RUN pnpm install
 RUN pnpm tailwindcss -i ./src/index.css -o ./src/tailwind.css
 RUN pnpm run build --outdir=build
+# RUN pnpm install -g serve
+# CMD [ "serve", "-s", "build" ]
 
 # Second stage: Nginx
 FROM nginx:latest
