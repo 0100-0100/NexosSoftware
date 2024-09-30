@@ -8,6 +8,7 @@ import axios from 'axios'
 function useLogin() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
   const [loginData, setLoginData] = useState({
     email: "",
     password: ""
@@ -37,12 +38,13 @@ function useLogin() {
         }
       } catch (error: any) {
         setIsLoading(false)
+        setError(error.response?.data?.detail || 'Error Logging in!!')
         toast.error(error.response?.data?.detail || 'Error Logging in!!')
       }
     }
   }
 
-  return { loginData, isLoading, handleOnChange, handleSubmit, navigate }
+  return { loginData, isLoading, handleOnChange, handleSubmit, error, navigate }
 }
 
 function useProfile() {
@@ -105,7 +107,9 @@ function useSignup() {
 
   async function postSignUp(formdata: any) {
     try {
+      setIsLoading(true)
       const response = await axios.post("http://localhost:8000/api/v1/auth/signup", formdata)
+      setIsLoading(false)
       return response
     } catch (error: any) {
       let elements = []
@@ -143,20 +147,32 @@ function useSignup() {
 
 function useVerifyEmail() {
   const [otp, setOtp] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+
+  const handleOnChange = (e: any) => {
+    setOtp(e.target.value)
+  }
   const navigate = useNavigate()
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     if (otp) {
-      const response = await axios.post("http://localhost:8000/api/v1/auth/verify", {'otp': otp})
-      if (response.status === 200) {
-        navigate('/')
-        toast.success(response.data.message)
+      try {
+        const response = await axios.post("http://localhost:8000/api/v1/auth/verify", {'otp': otp})
+        if (response.status === 200) {
+          navigate('/')
+          toast.success(response.data.message)
+        }
+      } catch (error: any) {
+        setIsLoading(false)
+        setError(error.response?.data?.data?.detail || 'Error Sending email address in A!!')
+        toast.error(error.response?.data?.data?.detail || 'Error Sending email address in B!!')
+        return error
       }
     }
   }
-
-  return { otp, setOtp, handleSubmit }
+  return { isLoading, otp, handleOnChange, handleSubmit, error }
 }
 
 function useForgotMyPassword() {
@@ -203,6 +219,8 @@ function useForgotMyPassword() {
 function useResetPassword() {
   const navigate=useNavigate()
   const { uid, token } = useParams()
+  const [ isLoading, setIsLoading ] = useState(false)
+  const [error, setError] = useState<ReactNode>(null)
   const [ formData, setNewPassword ]=useState({
     password:"",
     confirm_password:"",
@@ -222,17 +240,32 @@ function useResetPassword() {
 
   const handleSubmit = async (e: any)=>{
     e.preventDefault()
-    if (data) {
-      const res = await AxiosInstance.patch('/auth/set-new-password', data)
-      const response = res.data
-      if (res.status === 200) {
-        navigate('/')
-        toast.success(response.message)
+    if (!password || !confirm_password) {
+      setError(<p>All Fields are required.</p>)
+    } else if (data) {
+      try {
+        setIsLoading(true)
+        const res = await AxiosInstance.patch('/auth/set-new-password', data)
+        setIsLoading(false)
+        const response = res.data
+        if (res.status === 200) {
+          navigate('/')
+          toast.success(response.message)
+        }
+        console.log(response)
+      } catch (error: any) {
+        let elements = []
+        console.log(error.response.data)
+        for (let i in error.response.data) {
+            elements.push(<p>{error.response.data[i]}</p>)
+        }
+        setIsLoading(false)
+        setError(<>{elements}</>)
+        return error
       }
-      console.log(response)
     }
   }
-  return {  formData, handleChange, handleSubmit }
+  return { isLoading, formData, handleChange, handleSubmit, error }
 }
 
 
