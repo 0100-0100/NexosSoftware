@@ -1,5 +1,5 @@
 import './tailwind.css';
-import './App.css';
+// import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -27,9 +27,11 @@ class App extends React.Component {
             <Route path='/' element={<Login/>} />
             <Route path='/signup' element={<Signup/>} />
             <Route path='/verify' element={<VerifyEmail/>} />
-            <Route path='/profile' element={<Profile/>} />
             <Route path='/forgot-my-password' element={<ForgetPassword/>} />
             <Route path='/confirm-forgot-my-password/:uid/:token' element={<ResetPassword/>}/>
+
+            <Route path='/profile' element={<Profile/>} />
+
           </Routes>
         </Router>
       </>
