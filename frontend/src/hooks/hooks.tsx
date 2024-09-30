@@ -173,6 +173,7 @@ function useForgotMyPassword() {
     e.preventDefault()
     if (email) {
       try {
+        setError('')
         setIsLoading(true)
         const response = await axios.post("http://127.0.0.1:8000/api/v1/auth/forgot-my-password", {'email': email})
         setIsLoading(false)
@@ -189,14 +190,14 @@ function useForgotMyPassword() {
         }
       } catch (error: any) {
         setIsLoading(false)
-        setError(error.response?.data?.detail || 'Error Sending email address in A!!')
-        toast.error(error.response?.data?.detail || 'Error Sending email address in B!!')
+        setError(error.response?.data?.data?.detail || 'Error Sending email address in A!!')
+        toast.error(error.response?.data?.data?.detail || 'Error Sending email address in B!!')
         return error
       }
     }
   }
   // const fields = [email]
-  return { email, isLoading, handleOnChange, handleSubmit, error}
+  return { email, isLoading, handleOnChange, handleSubmit, error, navigate }
 }
 
 function useResetPassword() {
