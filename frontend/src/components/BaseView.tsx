@@ -7,15 +7,9 @@ interface BaseViewProps {
 
 const BaseView: React.FC<BaseViewProps> = ({ content, isLoading }) => {
   return (
-    <body>
-      <main className="container w-100">
-        <article className="container w-100">
-          <div className='container flex h-screen'>
-            {isLoading ? 'Loading...' : content}
-          </div>
-        </article>
-      </main>
-    </body>
+    <div className='flex flex-wrap flex-col justify-center content-center w-full h-screen' >
+      {isLoading ? 'Loading...' : content}
+    </div>
   );
 };
 
