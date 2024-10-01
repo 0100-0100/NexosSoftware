@@ -3,9 +3,10 @@ import './tailwind.css';
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ForgetPassword, ResetPassword, Login, Profile, Signup, VerifyEmail } from "./components"
 import { ToastContainer } from 'react-toastify'
 import { Helmet } from 'react-helmet'
+
+import { ForgetPassword, ResetPassword, Profile, Login, Signup, VerifyEmail } from "modules/auth/components"
 
 class App extends React.Component {
   render () {
