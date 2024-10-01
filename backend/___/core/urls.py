@@ -12,8 +12,8 @@ urlpatterns = [
     path('token/', TokenRefreshView.as_view(), name='token'),
     path('token/refresh', TokenRefreshView.as_view(), name='refresh'),
 
-    path('password-reset', views.PasswordResetRequestView.as_view(), name='password-reset'),
-    path('password-reset-confirm/<uidb64>/<token>', views.PasswordResetConfirm.as_view(), name='password-reset-confirm'),
+    path('forgot-my-password', views.ForgotMyPasswordView.as_view(), name='forgot-my-password'),
+    path('confirm-forgot-my-password/<uidb64>/<token>', views.PasswordResetConfirm.as_view(), name='confirm-forgot-my-password'),
     path('set-new-password', views.SetNewPassword.as_view(), name='set-new-password'),
 
     # Test Path for validating correrct access to resources once authenticated.

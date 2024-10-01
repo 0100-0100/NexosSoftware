@@ -85,37 +85,38 @@ class CoreUserLoginSerializer(serializers.ModelSerializer):
         }
 
 
-class PasswordResetRequestSerializer(serializers.Serializer):
-    email = serializers.EmailField(max_length=255)
+class ForgotMyPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True, max_length=50)
 
     class Meta:
         fields = ['email']
 
     def validate(self, attrs):
         email = attrs.get('email')
-        if CoreUser.objects.filter(email=email):
-            user = CoreUser.objects.get(email=email)
-            uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
-            token = PasswordResetTokenGenerator().make_token(user)
-            request = self.context.get('request')
-            site_domain = get_current_site(request).domain
-            relative_link = reverse(
-                'password-reset-confirm',
-                kwargs={'uidb64': uidb64, 'token': token}
-            )
-            absolute_link = f"http://{site_domain}{relative_link}"
-            email_body = f"""
-            Hi,
-            Please use the following link to reset your password
-            {absolute_link}
-            """
-            data = {
-                'email_body': email_body,
-                'email_subject': 'Reset your password!',
-                'to_email': user.email
-            }
-            send_normal_email(data)
-        return super().validate(attrs)
+        CoreUser.objects.get(email=email)
+        return attrs
+
+    def create(self, validated_data):
+        user = CoreUser.objects.get(email=validated_data['email'])
+        uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
+        token = PasswordResetTokenGenerator().make_token(user)
+        absolute_link = (
+            f"http://localhost/confirm-forgot-my-password/{uidb64}/{token}"
+        )
+        email_body = f"""
+        Hi!
+
+        Here's your password reset link:
+
+        {absolute_link}
+        """
+        data = {
+            'email_body': email_body,
+            'email_subject': "Here's your password reset link",
+            'to_email': user.email
+        }
+        send_normal_email(data)
+        return user
 
 
 class SetNewPasswordSerializer(serializers.Serializer):
