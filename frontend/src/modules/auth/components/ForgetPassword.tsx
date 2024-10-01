@@ -1,5 +1,5 @@
-import { useForgotMyPassword } from 'hooks/hooks'
-import BaseView from 'components/BaseView'
+import { useForgotMyPassword } from 'modules/auth/hooks/'
+import BaseView from 'modules/core/design-system/BaseView'
 // import InputCard from 'components/InputCard'
 
 const ForgetPassword = () => {
@@ -17,12 +17,6 @@ const ForgetPassword = () => {
           <input value={email} onChange={handleOnChange} name="email" type="text" autoComplete="username"
                  className='w-full border border-gray-400 rounded box-border p-3 outline-none' />
         </div>
-
-
-
-
-
-
 
         <input value={isLoading ? "Loading..." : "Send Reset Password Email"} type="submit" disabled={isLoading}
                className="select-none w-full hover:bg-primary-400 bg-primary-500 text-[#FFFFFF] font-bold cursor-pointer rounded-md p-3" />

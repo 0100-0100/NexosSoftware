@@ -1,4 +1,5 @@
-import { useProfile } from 'hooks'
+import { useProfile } from 'modules/auth/hooks/'
+
 const Profile = () => {
   const {user, usersData, handleLogout} = useProfile()
   return (

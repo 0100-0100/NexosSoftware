@@ -1,5 +1,5 @@
-import { useLogin } from 'hooks'
-import BaseView from 'components/BaseView'
+import { useLogin } from 'modules/auth/hooks/'
+import BaseView from 'modules/core/design-system/BaseView'
 
 
 const Login = () => {

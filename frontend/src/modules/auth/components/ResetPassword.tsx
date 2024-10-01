@@ -1,5 +1,5 @@
-import { useResetPassword } from 'hooks'
-import BaseView from 'components/BaseView'
+import { useResetPassword } from 'modules/auth/hooks/'
+import BaseView from 'modules/core/design-system/BaseView'
 
 
 const ResetPassword = () => {

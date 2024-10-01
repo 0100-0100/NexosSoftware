@@ -13,4 +13,4 @@ const BaseView: React.FC<BaseViewProps> = ({ content, isLoading }) => {
   );
 };
 
-export default BaseView;
+export default BaseView

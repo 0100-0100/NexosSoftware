@@ -1,5 +1,5 @@
-import { useVerifyEmail } from 'hooks'
-import BaseView from 'components/BaseView'
+import { useVerifyEmail } from 'modules/auth/hooks/'
+import BaseView from 'modules/core/design-system/BaseView'
 
 
 const VerifyEmail = () => {
