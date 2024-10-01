@@ -6,14 +6,15 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.111",
-    "@types/react": "^18.3.9",
+    "@types/node": "^16.18.112",
+    "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.7",
     "dayjs": "^1.11.13",
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@babel/plugin-transform-private-property-in-object": "^7.24.7",
     "@testing-library/jest-dom": "^5.17.0",
+    "@types/react-helmet": "^6.1.11",
     "react-refresh": "^0.14.2",
     "tailwindcss": "^3.4.13"
   },
@@ -56,5 +58,6 @@
       "nth-check@<2.0.1": ">=2.0.1",
       "rollup@<3.29.5": ">=3.29.5"
     }
-  }
+  },
+  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b"
 }

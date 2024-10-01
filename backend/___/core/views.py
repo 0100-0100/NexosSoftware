@@ -8,7 +8,6 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-# from rest_framework.views import APIView
 
 from . import serializers
 from .models import CoreUser, OneTimePassword
@@ -96,20 +95,40 @@ class LoginUserView(GenericAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class PasswordResetRequestView(GenericAPIView):
-    serializer_class = serializers.PasswordResetRequestSerializer
+class ForgotMyPasswordView(GenericAPIView):
+    serializer_class = serializers.ForgotMyPasswordSerializer
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         serializer = self.serializer_class(
             data=request.data, context={'request': request}
         )
-        serializer.is_valid(raise_exception=True)
+
+        try:
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            email = serializer.data['email']
+
+        except CoreUser.DoesNotExist:
+            return Response({
+                'data': {'detail': 'Email is not registered'}
+            }, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            print(e)
+            return Response({
+                'data': {'detail': 'Error validating your email'}
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         return Response({
-            'message': 'We have sent a link for you to reset your password.'
-        }, status=status.HTTP_200_OK)
+            'message':
+            f'We have sent a link to {email} for your password reset'
+        }, status=status.HTTP_202_ACCEPTED)
 
 
 class PasswordResetConfirm(GenericAPIView):
+    permission_classes = (AllowAny,)
+
     def get(self, request, uidb64, token):
         try:
             user_id = smart_str(urlsafe_base64_decode(uidb64))
@@ -138,6 +157,7 @@ class PasswordResetConfirm(GenericAPIView):
 
 class SetNewPassword(GenericAPIView):
     serializer_class = serializers.SetNewPasswordSerializer
+    permission_classes = (AllowAny,)
 
     def patch(self, request):
         serializer = self.serializer_class(data=request.data)
