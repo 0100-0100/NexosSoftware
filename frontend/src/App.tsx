@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify'
 import { Helmet } from 'react-helmet'
 
 import { ForgetPassword, ResetPassword, Profile, Login, Signup, VerifyEmail } from "modules/auth/components"
+import { Home } from 'modules/home/components'
 
 class App extends React.Component {
   render () {
@@ -31,6 +32,7 @@ class App extends React.Component {
             <Route path='/forgot-my-password' element={<ForgetPassword/>} />
             <Route path='/confirm-forgot-my-password/:uid/:token' element={<ResetPassword/>}/>
 
+            <Route path='/home' element={<Home/>} />
             <Route path='/profile' element={<Profile/>} />
 
           </Routes>
