@@ -34,7 +34,7 @@ function useLogin() {
           localStorage.setItem("accessToken", JSON.stringify(response.data.access_token))
           localStorage.setItem("refreshToken", JSON.stringify(response.data.refresh_token))
           toast.success('Successful Login.')
-          navigate("/profile")
+          navigate("/home")
         }
       } catch (error: any) {
         setIsLoading(false)
